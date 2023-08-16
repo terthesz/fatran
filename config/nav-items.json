@@ -1,0 +1,22 @@
+[
+  {
+    "name": "domov",
+    "path": "home"
+  },
+  {
+    "name": "akcie",
+    "path": "events"
+  },
+  {
+    "name": "kalendár",
+    "path": "calendar"
+  },
+  {
+    "name": "o skautingu",
+    "path": "about-scouting"
+  },
+  {
+    "name": "o nás",
+    "path": "about-us"
+  }
+]

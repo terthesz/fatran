@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  /* #region Global */
+  html, body {
+    @apply w-[100%] m-0 p-0;
+  }
+
+  section {
+    @apply w-full h-full relative flex;
+  }
+
+  *,
+  *::before
+  *::after {
+    @apply box-border text-gray-700;
+  }
+
+  transition-200ms {
+    @apply transition-all duration-200;
+  }
+  /* #endregion */
+
+
+
+  /* #region Navbar */
+
+  .scrolled {
+    @apply bg-white !text-gray-800;
+  }
+
+  .scrolled nav a {
+    @apply text-gray-600 after:bg-gray-700 hover:text-gray-800;
+  }
+
+  .scrolled nav a.active {
+    @apply text-gray-800;
+  }
+
+  nav {
+    @apply absolute left-1/2 -translate-x-1/2 flex flex-row gap-[2rem];
+  }
+
+  nav a {
+    @apply font-semibold relative text-gray-300 transition-colors duration-100
+           /* AFTER */
+           after:content-[''] after:block after:absolute after:h-[2px] after:rounded-full
+           after:w-[0%] after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:bg-white
+           after:transition-all after:duration-100
+           /* HOVER */
+           hover:after:w-[20%] hover:text-white hover:scale-105
+           /* ACTIVE */
+           active:scale-100
+  }
+
+  nav a.active {
+    @apply text-white
+           after:w-[50%];  
+  }
+
+
+  .nav-auth a {
+    @apply relative px-[2rem] py-[.4rem] text-[0.9rem] font-semibold tracking-wider rounded-md
+           hover:scale-[1.02] active:scale-[.98];
+  }
+  /* #endregion */
+
+
+
+  /* #region Header */
+
+  .header-icons {
+    @apply absolute right-0 bottom-0 flex flex-row text-white pr-[2rem] pb-[1.5rem] gap-[1rem];
+  }
+
+  .header-icons svg {
+    @apply opacity-50 cursor-pointer transition-all duration-100 hover:opacity-100 hover:scale-105 active:scale-95;
+  }
+  /* #endregion */
+
+
+
+  /* #region Auth */
+
+  #auth-form label {
+    @apply text-sm font-semibold text-gray-700 w-full ml-[.8rem];
+  }
+
+  #auth-form input {
+    @apply outline-none border-2 rounded-lg px-[.8rem] py-[.4rem] text-[.9rem] w-full;
+  }
+
+  #auth-form div {
+    @apply relative w-72;
+  }
+
+  #auth-form div::after {
+    @apply hidden left-0 text-sm ml-[.5rem] mt-[.1rem] pr-[.5rem] text-red-500 font-medium;
+  }
+
+  #auth-form div::after {
+    content: var(--error,'');
+  }
+
+  #auth-form div.error::after {
+    @apply block;
+  }
+
+  #auth-wrapper.error #auth-form input,
+  #auth-form div.error input {
+    @apply border-red-300;
+  }
+
+
+  #auth-form-submit.bad:hover,
+  #auth-wrapper.error #auth-form-submit {
+    background-color: rgb(248, 113, 113);
+  }
+
+  #auth-form-submit.good:hover {
+    background-color: rgb(101, 255, 158);
+
+    transform: scale(1.04);
+  }
+
+  #auth-form-submit.good:active {
+    transform: scale(0.96);
+  }
+
+  #auth-form-submit.disabled {
+    pointer-events: none;
+    background-color: rgb(222, 226, 233);
+  }
+
+
+  .verify-code input {
+    @apply text-2xl text-center text-gray-800 border border-gray-300 rounded-md;
+  }
+
+  .verify-code input:focus {
+    appearance: none;
+    border: none;
+    box-shadow: 0 0 0 3px rgba(39, 147, 255, 0.5);
+  }
+
+
+  #auth-layout-back:hover p {
+    @apply !left-[.8rem] !opacity-100;
+  }
+
+  #auth-layout-back:hover svg {
+    @apply scale-110;  
+  }
+
+  /* #endregion */
+
+
+  /* #region Hamburger */
+  #hamburger-nav hr {
+    @apply bg-black w-[2rem] h-[2px] my-[1rem];
+  }
+
+  #hamburger-nav a.active {
+    @apply font-bold;
+  }
+
+  /* #endregion */
+}
