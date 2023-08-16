@@ -61,6 +61,8 @@ const HamburgerNav = () => {
     return () => {
       document.removeEventListener('click', onClick);
       document.removeEventListener('scroll', onScroll);
+
+      setIsMenuOpen(false);
     };
   }, []);
 

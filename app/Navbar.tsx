@@ -76,6 +76,8 @@ const Navbar = () => {
       document.removeEventListener('click', onClick);
       document.removeEventListener('keydown', onKeydown);
       window.removeEventListener('scroll', onScroll);
+
+      setShowProfileMenu(false);
     };
   }, []);
 
@@ -129,6 +131,7 @@ const Navbar = () => {
                 <div className="absolute bg-white w-[1rem] aspect-square rounded-md rotate-45 -top-[.4rem] right-[.65rem] -z-10"></div>
                 <div className="bg-white flex flex-col gap-y-2 rounded-md px-[1.2rem] py-[1rem]">
                   <Link
+                    onClick={() => setShowProfileMenu(false)}
                     href="/user/settings"
                     className="!p-0 flex flex-row gap-[.3rem] items-center transition-all duration-100 hover:scale-[1.02] active:scale-[.98]"
                   >
@@ -138,6 +141,7 @@ const Navbar = () => {
                   <hr />
 
                   <Link
+                    onClick={() => setShowProfileMenu(false)}
                     href="/auth/logout"
                     className="!p-0 flex flex-row gap-[.3rem] items-center whitespace-nowrap text-red-500 duration-100 hover:scale-[1.02] active:scale-[.98]"
                   >
