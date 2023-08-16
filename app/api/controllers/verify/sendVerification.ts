@@ -21,11 +21,21 @@ export default async function sendVerification(
 
   if (!force && (await generatedWithinSoftTimeout(uid))) return actionSuccess();
 
-  const code = generateVerification(uid);
+  const code = await generateVerification(uid);
 
-  emailService.send(email as string, displayName as string, code);
+  let sent = await emailService.send(
+    email as string,
+    displayName as string,
+    code
+  );
+  if (!sent)
+    sent = await emailService.send(
+      email as string,
+      displayName as string,
+      code
+    );
 
-  return actionSuccess();
+  return sent ? actionSuccess() : actionError(500, 'Email failed to send.');
 }
 
 async function generatedWithinSoftTimeout(uid: string) {
@@ -41,7 +51,7 @@ async function generatedWithinSoftTimeout(uid: string) {
   return Date.now() - dateFromGenerated.getTime() <= softTimeout;
 }
 
-function generateVerification(uid: string) {
+async function generateVerification(uid: string) {
   const db = getDatabase();
   const ref = db.ref('verify/');
 
@@ -49,7 +59,7 @@ function generateVerification(uid: string) {
     Math.floor(Math.random() * (100_000 - 999_999 + 1)) + 999_999
   ).toString();
 
-  ref.set({
+  await ref.set({
     [uid]: {
       code,
       generated: new Date().toString(),

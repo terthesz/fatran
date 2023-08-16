@@ -1,4 +1,3 @@
-import nodemailer, { Transporter } from 'nodemailer';
 import VerifyEmail from '@/emails/VerifyEmail';
 import { render } from '@react-email/render';
 import { Resend } from 'resend';
@@ -6,7 +5,7 @@ import { Resend } from 'resend';
 export default class emailService {
   private static _transporter: Resend;
 
-  public static int(): emailService {
+  public static init(): emailService {
     if (this._transporter) return this;
 
     this._transporter = new Resend(process.env.RESEND_API as string);
@@ -15,18 +14,22 @@ export default class emailService {
   }
 
   public static async send(email: string, displayName: string, code: string) {
-    if (!this._transporter) this.int();
+    if (!this._transporter) this.init();
 
-    const info = await this._transporter.emails.send({
-      // TODO fatran.sk
-      from: 'noreply <noreply@sexydomena123.shop>',
-      to: email,
-      subject: 'paradabanakasaba',
-      text: 'a tak',
-      html: render(<VerifyEmail code={code} displayName={displayName} />),
-    });
+    try {
+      await this._transporter.emails.send({
+        // TODO fatran.sk
+        from: 'noreply <noreply@sexydomena123.shop>',
+        to: email,
+        subject: 'paradabanakasaba',
+        text: 'a tak',
+        html: render(<VerifyEmail code={code} displayName={displayName} />),
+      });
 
-    return JSON.stringify(info);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }
 
