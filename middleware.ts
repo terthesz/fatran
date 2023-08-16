@@ -17,9 +17,9 @@ const ratelimit = new Ratelimit({
 
 export default async function middleware(
   request: NextRequest,
-  response: NextResponse,
   event: NextFetchEvent
 ): Promise<Response | undefined> {
+  const response = NextResponse.next();
   response.headers.append('Access-Control-Allow-Origin', '*');
   response.headers.append(
     'Access-Control-Allow-Methods',
