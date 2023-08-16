@@ -19,17 +19,6 @@ export default async function middleware(
   request: NextRequest,
   event: NextFetchEvent
 ): Promise<Response | undefined> {
-  const response = NextResponse.next();
-  response.headers.append('Access-Control-Allow-Origin', '*');
-  response.headers.append(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, OPTIONS'
-  );
-  response.headers.append(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization'
-  );
-
   const ip =
     request.ip ||
     request.headers.get('x-real-ip') ||
